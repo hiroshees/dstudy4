@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+
+{% block title%}TOP{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        <h1 class="h1 m-3 font-weight-normal text-center">{{title}}</h1>
+        <div>
+            <div class="row my-2 ml-2">
+                <div class="col p-3 border">
+                    <a href="{% url 'account_login' %}">ログイン</a>
+                </div>
+            </div>
+            <div class="row my-2 ml-2">
+                <div class="col py-3 border">
+                    <a href="{% url 'account_signup' %}">新規ユーザ登録</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

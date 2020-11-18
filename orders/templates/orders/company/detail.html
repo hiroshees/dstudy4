@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}会社表示{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-3">会社表示</h1>
+    <div class="mb-3">
+        <a href="{% url 'orders:company_list'%}" class="btn btn-primary">一覧に戻る</a>
+    </div>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <td>{{object.id}}</td>
+        </tr>
+        <tr>
+            <th>会社名</th>
+            <td>{{object.name}}</td>
+        </tr>
+        <tr>
+            <th>登録日</th>
+            <td>{{object.created}}</td>
+        </tr>
+        <tr>
+            <th>更新日</th>
+            <td>{{object.modified}}</td>
+        </tr>
+    </table>
+    <hr>
+    {% comment %}
+    <div class="container border border-bottom-0">
+        <div class="row border-bottom">
+            <div class="col-1 bg-secondary text-white p-2 border-right">ID</div>
+            <div class="col-2 bg-secondary text-white p-2 border-right">本名</div>
+            <div class="col-2 bg-secondary text-white p-2 border-right">金額</div>
+            <div class="col-2 bg-secondary text-white p-2 border-right">著者名</div>
+            <div class="col-2 bg-secondary text-white p-2 border-right">カテゴリ</div>
+            <div class="col-1 bg-secondary text-white p-2 border-right">編集</div>
+            <div class="col-1 bg-secondary text-white p-2 border-right">削除</div>
+            <div class="col-1 bg-secondary text-white p-2">表示</div>
+        </div>
+        {% for o in object.book_set.all  %}
+        <div class="row border-bottom">
+            <div class="col-1 bg-light p-2 border-right">{{o.id}}</div>
+            <div class="col-2 p-2 border-right">{{o.title}}</div>
+            <div class="col-2 p-2 border-right">{{o.price}}</div>
+            <div class="col-2 p-2 border-right">{{o.author.name}}</div>
+            <div class="col-2 p-2 border-right">{{o.category.name}}</div>
+            <div class="col-1 p-2 border-right">
+                <a href="{% url 'book:book_edit' o.id %}">編集</a>
+            </div>
+            <div class="col-1 p-2 border-right">
+                <a href="{% url 'book:book_delete' o.id %}">削除</a>
+            </div>
+            <div class="col-1 p-2">
+                <a href="{% url 'book:book_detail' o.id %}">表示</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endcomment %}
+</div>
+{% endblock %}

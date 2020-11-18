@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load bootstrap4 %}
+{% load account socialaccount %}
+{% load static %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        <h1 class="h1 m-3 font-weight-normal text-center">ログイン</h1>
+        <form action="{% url 'account_login' %}" method="post" novalidate>
+            {% bootstrap_form_errors form layout='inline' %}
+            {% bootstrap_form form layout='inline' %}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-lg btn-block" >ログイン</button>
+            <div class="m-3 text-center">OR</div>
+            <div class="text-center">
+              <a href="{% provider_login_url 'google' %}"><img src="{% static 'image/btn_google_signin_dark_normal_web@2x.png' %}" class="google_image"></a>
+            </div>
+            <hr>
+            <a href="{% url 'account_signup' %}" class="btn btn-success">新規ユーザ登録</a>
+            <a href="{% url 'account_reset_password' %}" class="btn btn-success">パスワードを忘れた方</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

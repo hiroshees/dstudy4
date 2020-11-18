@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}受注表示{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-3">受注表示</h1>
+    <div class="mb-3">
+        <a href="{% url 'orders:order_list'%}" class="btn btn-primary">一覧に戻る</a>
+    </div>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <td>{{object.id}}</td>
+        </tr>
+        <tr>
+            <th>受注名</th>
+            <td>{{object.title}}</td>
+        </tr>
+        <tr>
+            <th>会社名</th>
+            <td>{{object.company.name}}</td>
+        </tr>
+        <tr>
+            <th>登録日</th>
+            <td>{{object.created}}</td>
+        </tr>
+        <tr>
+            <th>更新日</th>
+            <td>{{object.modified}}</td>
+        </tr>
+    </table>
+    <hr>
+    <h2 class="mb-3">受注詳細表示</h2>
+    <div class="mb-3">
+        <a href="{% url 'orders:orderdetail_create' object.id  %}" class="btn btn-primary">新規作成</a>
+    </div>
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col-1 bg-secondary text-white p-2 border">ID</div>
+            <div class="col-2 bg-secondary text-white p-2 border">商品名</div>
+            <div class="col-2 bg-secondary text-white p-2 border">商品金額</div>
+            <div class="col-2 bg-secondary text-white p-2 border">個数</div>
+            <div class="col-1 bg-secondary text-white p-2 border">編集</div>
+            <div class="col-1 bg-secondary text-white p-2 border">削除</div>
+        </div>
+        {% for o in object.orderdetail_set.all  %}
+        <div class="row">
+            <div class="col-1 bg-light p-2 border">{{o.id}}</div>
+            <div class="col-2 p-2 border">{{o.item.name}}</div>
+            <div class="col-2 p-2 border">{{o.item.price}}</div>
+            <div class="col-2 p-2 border">{{o.unit}}</div>
+            <div class="col-1 p-2 border">
+                <a href="{% url 'orders:orderdetail_edit' o.id %}">編集</a>
+            </div>
+            <div class="col-1 p-2 border">
+                <a href="{% url 'orders:orderdetail_delete' o.id %}">削除</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

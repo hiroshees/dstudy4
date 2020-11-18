@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block title %}新規ユーザ登録{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        <h1 class="h1 m-3 font-weight-normal text-center">新規ユーザ登録</h1>
+        <form action="{% url 'account_signup' %}" method="post" novalidate>
+            {% bootstrap_form_errors form layout='inline' %}
+            {% bootstrap_form form layout='inline' %}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-lg btn-block" >登録</button>
+            <hr>
+            <a href="{% url 'account_login' %}" class="btn btn-success">ログイン</a>
+            <a href="{% url 'account_reset_password' %}" class="btn btn-success">パスワードを忘れた方</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
